@@ -1074,7 +1074,7 @@ git checkout dev
 git merge feature/msp-14
 git push origin dev
 ```
-
+.
 ## MSP 15 - Create a QA Automation Environment with Kubernetes - Part-1
 
 - Create `feature/msp-15` branch from `dev`.
