@@ -7,11 +7,11 @@ module "iam" {
 }
 
 resource "aws_security_group" "matt-kube-mutual-sg" {
-  name = "kube-mutual-sec-group-for-matt"
+  name = "kube-mutual-sec-group-for-"
 }
 
 resource "aws_security_group" "matt-kube-worker-sg" {
-  name = "kube-worker-sec-group-for-matt"
+  name = "kube-worker-sec-group-for-"
   ingress {
     protocol = "tcp"
     from_port = 10250
@@ -46,13 +46,13 @@ resource "aws_security_group" "matt-kube-worker-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "kube-worker-secgroup"
+    Name = "kube-worker-secgroup-2"
     "kubernetes.io/cluster/mattsCluster" = "owned"
   }
 }
 
 resource "aws_security_group" "matt-kube-master-sg" {
-  name = "kube-master-sec-group-for-matt"
+  name = "kube-master-sec-group-for-"
 
   ingress {
     protocol = "tcp"
@@ -128,7 +128,7 @@ resource "aws_security_group" "matt-kube-master-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "kube-master-secgroup"
+    Name = "kube-master-secgroup-2"
   }
 }
 
@@ -138,10 +138,10 @@ resource "aws_instance" "kube-master" {
     iam_instance_profile = module.iam.master_profile_name
     vpc_security_group_ids = [aws_security_group.matt-kube-master-sg.id, aws_security_group.matt-kube-mutual-sg.id]
     key_name = "mattkey"
-    subnet_id = "subnet-c41ba589"  # select own subnet_id of us-east-1a
+    subnet_id = "subnet-0d2da52b4ef064c2f"  # select own subnet_id of us-east-1a
     availability_zone = "us-east-1a"
     tags = {
-        Name = "kube-master"
+        Name = "kube-masterr"
         "kubernetes.io/cluster/mattsCluster" = "owned"
         Project = "tera-kube-ans"
         Role = "master"
@@ -156,10 +156,10 @@ resource "aws_instance" "worker-1" {
     iam_instance_profile = module.iam.worker_profile_name
     vpc_security_group_ids = [aws_security_group.matt-kube-worker-sg.id, aws_security_group.matt-kube-mutual-sg.id]
     key_name = "mattkey"
-    subnet_id = "subnet-c41ba589"  # select own subnet_id of us-east-1a
+    subnet_id = "subnet-0d2da52b4ef064c2f"  # select own subnet_id of us-east-1a
     availability_zone = "us-east-1a"
     tags = {
-        Name = "worker-1"
+        Name = "workerr-1"
         "kubernetes.io/cluster/mattsCluster" = "owned"
         Project = "tera-kube-ans"
         Role = "worker"
@@ -174,10 +174,10 @@ resource "aws_instance" "worker-2" {
     iam_instance_profile = module.iam.worker_profile_name
     vpc_security_group_ids = [aws_security_group.matt-kube-worker-sg.id, aws_security_group.matt-kube-mutual-sg.id]
     key_name = "mattkey"
-    subnet_id = "subnet-030dea998a0b67a6f"  # select own subnet_id of us-east-1a
-    availability_zone = "us-east-1e"
+    subnet_id = "subnet-0d2da52b4ef064c2f"  # select own subnet_id of us-east-1a
+    availability_zone = "us-east-1a"
     tags = {
-        Name = "worker-2"
+        Name = "workerr-2"
         "kubernetes.io/cluster/mattsCluster" = "owned"
         Project = "tera-kube-ans"
         Role = "worker"
